@@ -7,15 +7,18 @@ import javax.swing.JOptionPane;
 
 public class conectaDAO {
     
-    public Connection connectDB(){
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/uc11";
+    private static final String DB_USER = "dev";
+    private static final String DB_PASSWORD = "123456";
+
+    public Connection connectDB() {
         Connection conn = null;
-        
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/uc11?user=root&password=");
-        } catch (SQLException erro){
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
         }
         return conn;
     }
-    
+
 }
