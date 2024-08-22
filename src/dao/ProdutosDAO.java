@@ -46,7 +46,7 @@ public class ProdutosDAO {
             rs = st.executeQuery();
             while (rs.next()) {
                 ProdutosDTO produtosDTO = new ProdutosDTO();
-                produtosDTO.setId(rs.getInt("id"));;
+                produtosDTO.setId(rs.getInt("id"));
                 produtosDTO.setNome(rs.getString("nome"));
                 produtosDTO.setValor(rs.getInt("valor"));
                 produtosDTO.setStatus(rs.getString("status"));
@@ -90,7 +90,11 @@ public class ProdutosDAO {
                 produtosDTO.setStatus(rs.getString("status"));
                 listaProdutos.add(produtosDTO);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+        } finally {
+            conectaDAO.closeConnection();
+            conectaDAO.closeSt(st);
+            conectaDAO.closeRs(rs);
         }
         return listaProdutos;
     }
