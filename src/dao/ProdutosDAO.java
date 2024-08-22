@@ -19,6 +19,8 @@ public class ProdutosDAO {
             = "SELECT * FROM produtos WHERE status = 'A Venda'";
     private static final String LISTAR_PRODUTOS_VENDIDO_STRING
             = "SELECT * FROM produtos WHERE status = 'Vendido'";
+    private static final String VENDER_PRODUTO 
+            = "UPDATE produtos SET status='Vendido' WHERE id=? ";
 
     public void cadastrarProduto(ProdutosDTO produto) throws SQLException {
         try {
@@ -58,6 +60,20 @@ public class ProdutosDAO {
             conectaDAO.closeRs(rs);
         }
         return listaProdutos;
+    }
+    
+    public void venderProduto(int id) throws SQLException {
+        try {
+            conn = new conectaDAO().connectDB();
+            st = conn.prepareStatement(VENDER_PRODUTO);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            conectaDAO.closeConnection();
+            conectaDAO.closeSt(st);
+        }
     }
 
     public List<ProdutosDTO> listarProdutosVendidos() throws SQLException {
