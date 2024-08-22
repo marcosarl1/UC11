@@ -129,8 +129,12 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         ProdutosDAO produtosdao = new ProdutosDAO();
 
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        try {
+            produtosdao.venderProduto(Integer.parseInt(id));
+            listarProdutos();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao vender produto, tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
