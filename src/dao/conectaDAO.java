@@ -15,10 +15,12 @@ public class conectaDAO {
     private static final String DB_PASSWORD = "123456";
 
     public Connection connectDB() {
-        try {
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+        if (conn == null) {
+            try {
+                conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+            }
         }
         return conn;
     }
